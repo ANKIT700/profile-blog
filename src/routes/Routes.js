@@ -1,25 +1,30 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import "./Routes.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
+
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Profile from "../components/profile/Profile";
+import Progress from "../components/progressbar/Progress";
+import UserInfo from "../components/profile/UserInfo";
 
 const routes = [
+  {
+    path: "/profile",
+    component: Profile,
+  },
   {
     path: "/sandwiches",
     component: Sandwiches,
     routes: [
       {
         path: "/sandwiches/pizza",
-        component: Pizza
+        component: Pizza,
       },
       {
         path: "/sandwiches/burger",
-        component: Burger
-      }
-    ]
+        component: Burger,
+      },
+    ],
   },
   {
     path: "/tacos",
@@ -27,23 +32,26 @@ const routes = [
     routes: [
       {
         path: "/tacos/bus",
-        component: Bus
+        component: Bus,
       },
       {
         path: "/tacos/car",
-        component: Car
-      }
-    ]
-  }
+        component: Car,
+      },
+    ],
+  },
 ];
 
-export default function App() {
+export default function Routes() {
   return (
     <Router>
-      <div >
+      <div className="main">
         <ul>
           <li>
             <Link to="/tacos">Tacos</Link>
+          </li>
+          <li>
+            <Link to="/profile">Profile</Link>
           </li>
           <li>
             <Link to="/sandwiches">Sandwiches</Link>
@@ -67,7 +75,7 @@ function RouteWithSubRoutes(route) {
   return (
     <Route
       path={route.path}
-      render={props => (
+      render={(props) => (
         // pass the sub-routes down to keep nesting
         <route.component {...props} routes={route.routes} />
       )}
@@ -75,7 +83,7 @@ function RouteWithSubRoutes(route) {
   );
 }
 
-function Sandwiches({ routes })  {
+function Sandwiches({ routes }) {
   return (
     <div>
       <h2>Sandwiches</h2>
@@ -94,7 +102,8 @@ function Sandwiches({ routes })  {
         ))}
       </Switch>
     </div>
-  );}
+  );
+}
 
 function Tacos({ routes }) {
   return (
@@ -126,9 +135,19 @@ function Car() {
   return <h3>Car</h3>;
 }
 function Pizza() {
-  return <h3>Pizza</h3>;
+  return (
+    <div>
+      <h3>Pizza</h3>
+      <Progress />
+    </div>
+  );
 }
 
 function Burger() {
-  return <h3>Burger</h3>;
+  return (
+    <div>
+      <h3>Burger</h3>
+      <UserInfo />
+    </div>
+  );
 }

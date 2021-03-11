@@ -45,7 +45,15 @@ const routes = [
 export default function Routes() {
   return (
     <Router>
-      <div className="main">
+      <div class="nav-bar">
+        <iframe
+          src="https://giphy.com/embed/T2T2fDUw6jZ5iuPXj2"
+          width="80"
+          height="60"
+          frameBorder="0"
+          class="giphy-embed"
+          allowFullScreen
+        ></iframe>
         <ul>
           <li>
             <Link to="/tacos">Tacos</Link>
@@ -57,7 +65,8 @@ export default function Routes() {
             <Link to="/sandwiches">Sandwiches</Link>
           </li>
         </ul>
-
+      </div>
+      <div className="sub">
         <Switch>
           {routes.map((route, i) => (
             <RouteWithSubRoutes key={i} {...route} />
